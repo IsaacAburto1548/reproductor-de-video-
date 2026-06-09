@@ -13,7 +13,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:show_buffering="when_playing"
-        app:use_controller="true"
+        app:use_controller="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,38 +29,174 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/centerPlayButton"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:contentDescription="Play/Pause"
-        android:src="@android:drawable/ic_media_play"
-        android:visibility="gone"
+    <!-- Controls Container -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/controlsContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <View
-        android:id="@+id/topOverlay"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:alpha="0.4"
-        android:background="@android:color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <!-- Top Bar -->
+        <View
+            android:id="@+id/topGradient"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="@drawable/gradient_top"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/topGradient"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Big Buck Bunny"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+            app:layout_constraintEnd_toStartOf="@+id/btnPiP"
+            app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+        <ImageView
+            android:id="@+id/btnPiP"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_pip"
+            app:layout_constraintEnd_toStartOf="@+id/btnFullscreen"
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+        <ImageView
+            android:id="@+id/btnFullscreen"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
+            android:src="@drawable/ic_fullscreen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+        <!-- Center Controls -->
+        <ImageView
+            android:id="@+id/btnRewind"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_rewind"
+            android:alpha="0.8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnPlayPause"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnPlayPause"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_pause"
+            android:alpha="0.8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btnForward"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:padding="16dp"
+            android:src="@drawable/ic_forward"
+            android:alpha="0.8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btnPlayPause"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Bottom Bar -->
+        <View
+            android:id="@+id/bottomGradient"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:background="@drawable/gradient_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCurrentTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="24dp"
+            android:text="00:00"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="/ 00:00"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCurrentTime"
+            app:layout_constraintStart_toEndOf="@+id/tvCurrentTime"
+            app:layout_constraintTop_toTopOf="@+id/tvCurrentTime" />
+
+        <SeekBar
+            android:id="@+id/videoSeekBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            android:progressDrawable="@drawable/custom_seekbar_progress"
+            android:thumb="@drawable/custom_seekbar_thumb"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Gesture Indicators -->
     <TextView
         android:id="@+id/rewindIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="-10s"
+        android:text="&lt;&lt; -10s"
         android:textColor="@android:color/white"
         android:textSize="24sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/centerPlayButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,13 +204,15 @@
         android:id="@+id/forwardIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+10s"
+        android:text="+10s &gt;&gt;"
         android:textColor="@android:color/white"
         android:textSize="24sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/centerPlayButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
